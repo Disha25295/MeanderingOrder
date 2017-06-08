@@ -1,0 +1,79 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+//Meandering order by Selection sort
+//Author Elvis I. Moreno
+namespace LaunchCode_Answer1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            int[] unsortedArray = new int[] { 5, 2, 7, 8, -2, 25, 25 };
+            int[] sortedArray = meanderingArray(unsortedArray);
+
+            for(int i = 0; i < unsortedArray.Length; i++)
+            {
+                Console.WriteLine(sortedArray[i]);
+            }
+
+            Console.ReadLine();
+        }
+        static int[] meanderingArray(int[] unsorted)
+        {
+
+            int array_size = unsorted.Length;// get the array length
+            int tmp, min_key, max_key; //declare variables to use in the for loop
+
+            //selection sort algorithm
+            for (int i = 0; i < array_size - 1; i++)
+            {
+                //max key and min key to get the lowest index
+                min_key = i;
+                max_key = array_size - 1;
+
+                
+                for (int j = i + 1; j < array_size; j++)
+                {
+                    //get max key for even numbers
+                    if (i % 2 == 0 || i == 0)
+                    {
+                        if (unsorted[j] > unsorted[max_key])
+                        {
+                            max_key = j;
+                        } 
+                    }
+                    //get min key for odd numbers
+                    else
+                    {
+                        if(unsorted[j] < unsorted[min_key])
+                        {
+                            min_key = j;
+                        }
+                    }
+                }
+                //sort for even numbers
+                if (i % 2 == 0 || i == 0)
+                {
+                    tmp = unsorted[max_key];
+                    unsorted[max_key] = unsorted[i];
+                    unsorted[i] = tmp; 
+                }
+                //sort for odd numbers
+                else
+                {
+                    tmp = unsorted[min_key];
+                    unsorted[min_key] = unsorted[i];
+                    unsorted[i] = tmp;
+                }
+            }
+
+            return unsorted;
+        }
+
+    }
+}
